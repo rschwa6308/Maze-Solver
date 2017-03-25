@@ -117,7 +117,7 @@ if __name__ == "__main__":
     name = getFilename()
     # name = "maze1"  + ".png"          #uncomment this line to override TK gui file selection
 
-    # print name
+    print name
     start_time = time.clock()
     
     source = Image.open(name)
@@ -136,9 +136,12 @@ if __name__ == "__main__":
     if (maze.solvable):
         output = maze.get_output_img()
         output_name = name[:-4] + "_solution.png"
-        output.save(output_name)
-        
-        os.system(output_name)
+        output_path = "\\".join(os.path.split(output_name)[:-1])
+        output_name = os.path.split(output_name)[-1]
+        output.save(output_path + "\\" + output_name)
+
+        cmd = output_path + "\\" + output_name
+        os.system(cmd)
     else:
         end_time = time.clock()
         top = tk.Tk()
