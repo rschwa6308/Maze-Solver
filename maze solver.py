@@ -53,11 +53,14 @@ class Maze():
         return "\n".join(["".join([("X", " ", " ", "*")[cell] for cell in row]) for row in self.maze])
 
     
-    def solve(self, x=None, y=None):        
+    def solve(self, x=None, y=None):
         if x == None:
             x, y = self.start
 
         try:
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    pg.display.quit()
             color = [black, blue, blue, red][self.maze[y][x]]
             pg.draw.rect(self.screen, color, pg.Rect(x * pixel_size, y * pixel_size, pixel_size, pixel_size), 0)
             pg.display.update()
